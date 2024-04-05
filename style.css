@@ -2,6 +2,8 @@
 
 * {
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
 :root {
@@ -14,9 +16,31 @@ body {
 }
 
 /* BODY STYLES */
+.title {
+    margin: auto;
+}
 
 .main-container {
     display: grid;
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
+}
+
+#game-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    margin: auto;
+    width: 300px;
+    gap: 2px;
+}
+
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    border: 2px solid;
+    cursor: pointer;
+    font-size: 50px;
 }
