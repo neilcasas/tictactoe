@@ -26,6 +26,11 @@ body {
     min-height: 100vh;
 }
 
+.play-area {
+    display: grid;
+    grid-template-rows: 2 1fr;
+}
+
 #game-container {
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -44,3 +49,9 @@ body {
     cursor: pointer;
     font-size: 50px;
 }
+
+.button-wrapper {
+    margin: auto;
+}
+
+/* FOOTER STYLES */
