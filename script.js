@@ -9,6 +9,12 @@ const gameContainer = (function () {
             index,
             text: '',
             turn,
+            setText(text) {
+                this.text = text;
+            },
+            setTurn(turn) {
+                this.turn = turn;
+            },
             displayText() {
                 this.text = this.turn ? 'X' : 'O';
             }
@@ -22,7 +28,7 @@ const gameContainer = (function () {
         cell.setAttribute('index', cellObject.index);
         cell.addEventListener('click', () => {
             cellObject.displayText();
-            cell.innerHTML = cellObject.text;
+            cell.textContent = cellObject.text;
         })
         return cell;
     }
@@ -38,6 +44,19 @@ const gameContainer = (function () {
     populateGrid();
 
     // reset game
-    const resetButton = document.getElementById()
+    const resetButton = document.getElementById("reset-button");
+    resetButton.addEventListener('click', () => {
+        // Clear text of cell objects
+        cells.forEach(cell => {
+            cell.setText('');
+        });
+
+        // update corresponding cell elements
+        const cellElements = gameContainerElement.querySelectorAll('.cell');
+        cellElements.forEach((cellElement, index) => {
+            cellElement.textContent = ''; // clear any text content
+            turn = true;
+        });
+    })
 })();
 
