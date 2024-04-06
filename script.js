@@ -1,6 +1,8 @@
 const gameContainerElement = document.getElementById('game-container');
-let cells = []; // array containing cells;
-let turn = true; // true denotes X's turn, false denotes O's turn
+const restartBtn = document.getElementById('reset-button');
+const statusText = document.querySelector('.status-text');
+let cells = []; // array containing cell objects;
+let player = true; // true denotes X's turn, false denotes O's turn
 const winningConditions = [
     [0, 1, 2],
     [3, 4, 5],
@@ -35,21 +37,42 @@ function createCellElement(cellObject) {
     let cell = document.createElement('div');
     cell.setAttribute('class', 'cell');
     cell.setAttribute('index', cellObject.index);
-    cell.addEventListener('click', () => {
-        cellObject.setText(turn);
-        cell.textContent = cellObject.text;
-    })
     return cell;
 }
 // create game countainer
 const gameContainer = (function () {
     // populate game container grid by 9 cells
-    function populateGrid() {
+    function initializeGame() {
         for (let i = 0; i < 9; i++) {
-            let cellObject = createCellObject(i, turn);
+            let cellObject = createCellObject(i, player);
             cells.push(cellObject); // push each cell object to array
             gameContainerElement.appendChild(createCellElement(cellObject));
         }
+        restartBtn.addEventListener('click', restartGame);
+        statusText.textContent = `${player ? 'X' : 'O'}'s turn`;
     };
-    populateGrid();
+    initializeGame();
 })();
+
+const cellElements = document.querySelectorAll('.cell');
+
+
+function cellClicked() {
+
+}
+
+function updateCell() {
+
+}
+
+function changePlayer() {
+
+}
+
+function checkWinner() {
+
+}
+
+function restartGame() {
+
+}
