@@ -60,6 +60,7 @@ function cellClicked() {
     }
     console.log('clicked')
     updateCell(this, cellIndex); // else call updateCell()
+    checkWinner(); // check winner upon clicking
 }
 
 function updateCell(cellElement, cellIndex) {
@@ -69,12 +70,14 @@ function updateCell(cellElement, cellIndex) {
     // update cell DOM object text
     cellElement.textContent = cells[cellIndex].getText();
 
-    checkWinner(); // check winner upon clicking
+    // update status text upon clicking
+    statusText.textContent = `${player ? 'O' : 'X'}'s turn.`
+
     changePlayer(); // change player upon clicking
 }
 
 function changePlayer() {
-
+    player = player ? false : true; // toggle between x and o
 }
 
 function checkWinner() {
