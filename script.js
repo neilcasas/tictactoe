@@ -3,7 +3,8 @@ const restartBtn = document.getElementById('reset-button');
 const statusText = document.querySelector('.status-text');
 let cells = []; // array containing cell objects;
 let player = true; // true denotes X's turn, false denotes O's turn
-const winningConditions = [
+let running = false; // denotes game state
+const winConditions = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -35,7 +36,7 @@ function createCellElement(cellObject) {
     cell.setAttribute('index', cellObject.index);
     return cell;
 }
-// create game countainer
+// create game container
 const gameContainer = (function () {
     // populate game container grid by 9 cells
     function initializeGame() {
@@ -46,6 +47,7 @@ const gameContainer = (function () {
             cellElement.addEventListener('click', cellClicked); // every cell element clicked will invoke the cellClicked function
             gameContainerElement.appendChild(cellElement) // create cell DOM element corresponding to cell object
         }
+        running = true // start game
         restartBtn.addEventListener('click', restartGame); // add eventListener to restart button
         statusText.textContent = `${player ? 'X' : 'O'}'s turn`; // initialize status text content
     };
@@ -69,21 +71,31 @@ function updateCell(cellElement, cellIndex) {
 
     // update cell DOM object text
     cellElement.textContent = cells[cellIndex].getText();
-
-    // update status text upon clicking
-    statusText.textContent = `${player ? 'O' : 'X'}'s turn.`
-
     changePlayer(); // change player upon clicking
 }
 
 function changePlayer() {
     player = player ? false : true; // toggle between x and o
+    // update status text
+    statusText.textContent = `${player ? 'X' : 'O'}'s turn`
 }
 
 function checkWinner() {
+    // check each winning condition
+    let win = false;
+    for (let i = 0; i < winConditions.length; i++) {
+        let condition = winConditions[i];
 
+    }
 }
-
+const cellElements = document.querySelectorAll('.cell');
 function restartGame() {
-
+    cells.forEach(cell => {
+        cell.setText('');
+    })
+    cellElements.forEach(cellElement => {
+        let cellIndex = cellElement.getAttribute('index');
+        cellElement.textContent = cells[cellIndex].getText();
+    })
+    statusText.textContent = '';
 }
