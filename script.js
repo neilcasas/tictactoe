@@ -44,21 +44,25 @@ const gameContainer = (function () {
     // populate game container grid by 9 cells
     function initializeGame() {
         for (let i = 0; i < 9; i++) {
-            let cellObject = createCellObject(i, player);
+            let cellObject = createCellObject(i, player); // create a cell object with an index and turn initialized to true
             cells.push(cellObject); // push each cell object to array
-            gameContainerElement.appendChild(createCellElement(cellObject));
+            let cellElement = createCellElement(cellObject);
+            cellElement.addEventListener('click', cellClicked); // every cell element clicked will invoke the cellClicked function
+            gameContainerElement.appendChild(cellElement) // create cell DOM element corresponding to cell object
         }
-        restartBtn.addEventListener('click', restartGame);
-        statusText.textContent = `${player ? 'X' : 'O'}'s turn`;
+        restartBtn.addEventListener('click', restartGame); // add eventListener to restart button
+        statusText.textContent = `${player ? 'X' : 'O'}'s turn`; // initialize status text content
     };
     initializeGame();
 })();
 
-const cellElements = document.querySelectorAll('.cell');
-
-
 function cellClicked() {
-
+    let cellIndex = this.getAttribute('index');
+    // check if cell object at that index has a text
+    if (cell[cellIndex].text != '') {
+        return;
+    }
+    updateCell(); // else call updateCell()
 }
 
 function updateCell() {
