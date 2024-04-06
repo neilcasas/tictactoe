@@ -15,29 +15,30 @@ const winConditions = [
     [2, 4, 6]
 ]
 
-// create cell object
-function createCellObject(index) {
-    return {
-        index,
-        text: '',
-        getText() {
-            return this.text;
-        },
-        setText(text) {
-            this.text = text;
-        },
-    }
-}
-
-// create cell DOM element
-function createCellElement(cellObject) {
-    let cell = document.createElement('div');
-    cell.setAttribute('class', 'cell');
-    cell.setAttribute('index', cellObject.index);
-    return cell;
-}
 // create game container
 const gameContainer = (function () {
+
+    // create cell object
+    function createCellObject(index) {
+        return {
+            index,
+            text: '',
+            getText() {
+                return this.text;
+            },
+            setText(text) {
+                this.text = text;
+            },
+        }
+    }
+
+    // create cell DOM element
+    function createCellElement(cellObject) {
+        let cell = document.createElement('div');
+        cell.setAttribute('class', 'cell');
+        cell.setAttribute('index', cellObject.index);
+        return cell;
+    }
     // populate game container grid by 9 cells
     function initializeGame() {
         for (let i = 0; i < 9; i++) {
@@ -49,83 +50,85 @@ const gameContainer = (function () {
         }
         running = true // start game
         restartBtn.addEventListener('click', restartGame); // add eventListener to restart button
-
+        statusText.textContent = `${player ? 'X' : 'O'}'s turn`
     };
     initializeGame();
-})();
 
-function cellClicked() {
-    let cellIndex = this.getAttribute('index');
-    // check if cell object at that index has a text
-    if (cells[cellIndex].text != '' || running == false) {
-        return;
+    function cellClicked() {
+        let cellIndex = this.getAttribute('index');
+        // check if cell object at that index has a text
+        if (cells[cellIndex].text != '' || running == false) {
+            return;
+        }
+        console.log('clicked')
+        updateCell(this, cellIndex); // else call updateCell()
+        checkWinner(); // check winner upon clicking
     }
-    console.log('clicked')
-    updateCell(this, cellIndex); // else call updateCell()
-    checkWinner(); // check winner upon clicking
-}
 
-function updateCell(cellElement, cellIndex) {
-    // update cell object's text
-    cells[cellIndex].setText(`${player ? 'X' : 'O'}`);
+    function updateCell(cellElement, cellIndex) {
+        // update cell object's text
+        cells[cellIndex].setText(`${player ? 'X' : 'O'}`);
 
-    // update cell DOM object text
-    cellElement.textContent = cells[cellIndex].getText();
-    changePlayer(); // change player upon clicking
-}
+        // update cell DOM object text
+        cellElement.textContent = cells[cellIndex].getText();
+        changePlayer(); // change player upon clicking
+    }
 
-function changePlayer() {
-    player = player ? false : true; // toggle between x and o
-    // update status text
-    statusText.textContent = `${player ? 'X' : 'O'}'s turn`
-}
+    function changePlayer() {
+        player = player ? false : true; // toggle between x and o
+        // update status text
+        statusText.textContent = `${player ? 'X' : 'O'}'s turn`
+    }
 
-function checkWinner() {
-    // check each winning condition
-    let win = false;
+    function checkWinner() {
+        // check each winning condition
+        let win = false;
 
-    for (let i = 0; i < winConditions.length; i++) {
-        let condition = winConditions[i];
+        for (let i = 0; i < winConditions.length; i++) {
+            let condition = winConditions[i];
 
-        const firstCell = cells[condition[0]];
-        const secondCell = cells[condition[1]];
-        const thirdCell = cells[condition[2]];
+            const firstCell = cells[condition[0]];
+            const secondCell = cells[condition[1]];
+            const thirdCell = cells[condition[2]];
 
-        // check if atleast one cell is empty
-        const cellsEmptyCondition = () => {
-            let emptyCondition = false;
-            for (let j = 0; j < condition.length; j++) {
-                let currentCell = cells[condition[j]];
-                if (currentCell.getText() == '') {
-                    emptyCondition = true;
-                    break;
+            // check if atleast one cell is empty
+            const cellsEmptyCondition = () => {
+                let emptyCondition = false;
+                for (let j = 0; j < condition.length; j++) {
+                    let currentCell = cells[condition[j]];
+                    if (currentCell.getText() == '') {
+                        emptyCondition = true;
+                        break;
+                    }
+                }
+                return emptyCondition;
+            }
+
+            // if all of the cells have content
+            if (!cellsEmptyCondition()) {
+                if (firstCell.getText() == secondCell.getText() && secondCell.getText() == thirdCell.getText()) {
+                    statusText.textContent = `${firstCell.getText()} is the winner!`;
+                    win = true;
+                    running = false; // stop the game when someone has won
+                    return win;
+                } else {
+                    continue;
                 }
             }
-            return emptyCondition;
-        }
-
-        // if all of the cells have content
-        if (!cellsEmptyCondition()) {
-            if (firstCell.getText() == secondCell.getText() && secondCell.getText() == thirdCell.getText()) {
-                statusText.textContent = `${firstCell.getText()} is the winner!`;
-                win = true;
-                running = false; // stop the game when someone has won
-                return win;
-            } else {
-                continue;
-            }
         }
     }
-}
-const cellElements = document.querySelectorAll('.cell');
-function restartGame() {
-    cells.forEach(cell => {
-        cell.setText('');
-    })
-    cellElements.forEach(cellElement => {
-        let cellIndex = cellElement.getAttribute('index');
-        cellElement.textContent = cells[cellIndex].getText();
-    })
-    statusText.textContent = '';
+    const cellElements = document.querySelectorAll('.cell');
+    function restartGame() {
+        cells.forEach(cell => {
+            cell.setText('');
+        })
+        cellElements.forEach(cellElement => {
+            let cellIndex = cellElement.getAttribute('index');
+            cellElement.textContent = cells[cellIndex].getText();
+        })
+        running = true;
+        statusText.textContent = `${player ? 'X' : 'O'}'s turn`
+    }
 
-}
+})();
+
