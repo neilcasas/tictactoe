@@ -49,7 +49,7 @@ const gameContainer = (function () {
         }
         running = true // start game
         restartBtn.addEventListener('click', restartGame); // add eventListener to restart button
-        statusText.textContent = `${player ? 'X' : 'O'}'s turn`; // initialize status text content
+
     };
     initializeGame();
 })();
@@ -83,9 +83,37 @@ function changePlayer() {
 function checkWinner() {
     // check each winning condition
     let win = false;
+
     for (let i = 0; i < winConditions.length; i++) {
         let condition = winConditions[i];
 
+        const firstCell = cells[condition[0]];
+        const secondCell = cells[condition[1]];
+        const thirdCell = cells[condition[2]];
+
+        // check if atleast one cell is empty
+        const cellsEmptyCondition = () => {
+            let emptyCondition = false;
+            for (let j = 0; j < condition.length; j++) {
+                let currentCell = cells[condition[j]];
+                if (currentCell.getText() == '') {
+                    emptyCondition = true;
+                    break;
+                }
+            }
+            return emptyCondition;
+        }
+
+        // if all of the cells have content
+        if (!cellsEmptyCondition()) {
+            if (firstCell.getText() == secondCell.getText() && secondCell.getText() == thirdCell.getText()) {
+                statusText.textContent = `${firstCell.getText()} is the winner!`;
+                win = true;
+                return win;
+            } else {
+                continue;
+            }
+        }
     }
 }
 const cellElements = document.querySelectorAll('.cell');
@@ -98,4 +126,5 @@ function restartGame() {
         cellElement.textContent = cells[cellIndex].getText();
     })
     statusText.textContent = '';
+
 }
