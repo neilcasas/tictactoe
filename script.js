@@ -1,38 +1,48 @@
-const gameContainer = (function () {
-    const gameContainerElement = document.getElementById('game-container');
-    let cells = []; // array containing cells;
-    let turn = true; // true denotes X's turn, false denotes O's turn
+const gameContainerElement = document.getElementById('game-container');
+let cells = []; // array containing cells;
+let turn = true; // true denotes X's turn, false denotes O's turn
+const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+]
 
-    // create cell object
-    function createCellObject(index, turn) {
-        return {
-            index,
-            text: '',
-            turn,
-            setText(text) {
-                this.text = text;
-            },
-            setTurn(turn) {
-                this.turn = turn;
-            },
-            displayText() {
-                this.text = this.turn ? 'X' : 'O';
-            }
+// create cell object
+function createCellObject(index, turn) {
+    return {
+        index,
+        text: '',
+        turn,
+        getText() {
+            return this.text;
+        },
+        setText(turn) {
+            this.text = turn ? 'X' : 'O';
+        },
+        setTurn(turn) {
+            this.turn = turn;
         }
     }
+}
 
-    // create cell DOM element
-    function createCellElement(cellObject) {
-        let cell = document.createElement('div');
-        cell.setAttribute('class', 'cell');
-        cell.setAttribute('index', cellObject.index);
-        cell.addEventListener('click', () => {
-            cellObject.displayText();
-            cell.textContent = cellObject.text;
-        })
-        return cell;
-    }
-
+// create cell DOM element
+function createCellElement(cellObject) {
+    let cell = document.createElement('div');
+    cell.setAttribute('class', 'cell');
+    cell.setAttribute('index', cellObject.index);
+    cell.addEventListener('click', () => {
+        cellObject.setText(turn);
+        cell.textContent = cellObject.text;
+    })
+    return cell;
+}
+// create game countainer
+const gameContainer = (function () {
     // populate game container grid by 9 cells
     function populateGrid() {
         for (let i = 0; i < 9; i++) {
@@ -42,21 +52,4 @@ const gameContainer = (function () {
         }
     };
     populateGrid();
-
-    // reset game
-    const resetButton = document.getElementById("reset-button");
-    resetButton.addEventListener('click', () => {
-        // Clear text of cell objects
-        cells.forEach(cell => {
-            cell.setText('');
-        });
-
-        // update corresponding cell elements
-        const cellElements = gameContainerElement.querySelectorAll('.cell');
-        cellElements.forEach((cellElement, index) => {
-            cellElement.textContent = ''; // clear any text content
-            turn = true;
-        });
-    })
 })();
-
