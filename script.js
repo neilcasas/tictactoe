@@ -15,20 +15,16 @@ const winningConditions = [
 ]
 
 // create cell object
-function createCellObject(index, turn) {
+function createCellObject(index) {
     return {
         index,
         text: '',
-        turn,
         getText() {
             return this.text;
         },
-        setText(turn) {
-            this.text = turn ? 'X' : 'O';
+        setText(text) {
+            this.text = text;
         },
-        setTurn(turn) {
-            this.turn = turn;
-        }
     }
 }
 
@@ -59,14 +55,22 @@ const gameContainer = (function () {
 function cellClicked() {
     let cellIndex = this.getAttribute('index');
     // check if cell object at that index has a text
-    if (cell[cellIndex].text != '') {
+    if (cells[cellIndex].text != '') {
         return;
     }
-    updateCell(); // else call updateCell()
+    console.log('clicked')
+    updateCell(this, cellIndex); // else call updateCell()
 }
 
-function updateCell() {
+function updateCell(cellElement, cellIndex) {
+    // update cell object's text
+    cells[cellIndex].setText(`${player ? 'X' : 'O'}`);
 
+    // update cell DOM object text
+    cellElement.textContent = cells[cellIndex].getText();
+
+    checkWinner(); // check winner upon clicking
+    changePlayer(); // change player upon clicking
 }
 
 function changePlayer() {
