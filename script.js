@@ -57,7 +57,7 @@ const gameContainer = (function () {
 function cellClicked() {
     let cellIndex = this.getAttribute('index');
     // check if cell object at that index has a text
-    if (cells[cellIndex].text != '') {
+    if (cells[cellIndex].text != '' || running == false) {
         return;
     }
     console.log('clicked')
@@ -109,6 +109,7 @@ function checkWinner() {
             if (firstCell.getText() == secondCell.getText() && secondCell.getText() == thirdCell.getText()) {
                 statusText.textContent = `${firstCell.getText()} is the winner!`;
                 win = true;
+                running = false; // stop the game when someone has won
                 return win;
             } else {
                 continue;
