@@ -1,3 +1,5 @@
+const mainContainer = document.querySelector('.main-container');
+const inputContainer = document.querySelector('.input-container');
 const gameContainerElement = document.getElementById('game-container');
 const resetBtnWrapper = document.querySelector('.reset-button-wrapper');
 const playAreaElement = document.querySelector('.play-area');
@@ -8,12 +10,14 @@ let player1, player2 = '';
 startBtn.addEventListener('click', () => {
     player1 = document.querySelector('.player1').value;
     player2 = document.querySelector('.player2').value;
-    console.log(player1 + " " + player2);
+    mainContainer.removeChild(inputContainer);
+    playArea();
 })
+
 // create game container
 const playArea = (function () {
     let cells = []; // array containing cell objects;
-    let player = true; // true denotes X's turn, false denotes O's turn
+    let turn = true; // true denotes X's turn, false denotes O's turn
     let running = false; // denotes game state
     let win = false;
 
@@ -63,7 +67,7 @@ const playArea = (function () {
     // populate game container grid by 9 cells
     function initializeGame() {
         for (let i = 0; i < 9; i++) {
-            let cellObject = createCellObject(i, player); // create a cell object with an index and turn initialized to true
+            let cellObject = createCellObject(i, turn); // create a cell object with an index and turn initialized to true
             cells.push(cellObject); // push each cell object to array
             let cellElement = createCellElement(cellObject);
             cellElement.addEventListener('click', cellClicked); // every cell element clicked will invoke the cellClicked function
@@ -71,7 +75,7 @@ const playArea = (function () {
         }
         running = true // start game
         restartBtn.addEventListener('click', restartGame); // add eventListener to restart button
-        statusText.textContent = `${player ? 'X' : 'O'}'s turn`
+        statusText.textContent = `${turn ? player1 : player2}'s turn`
     };
     initializeGame();
 
@@ -88,7 +92,7 @@ const playArea = (function () {
 
     function updateCell(cellElement, cellIndex) {
         // update cell object's text
-        cells[cellIndex].setText(`${player ? 'X' : 'O'}`);
+        cells[cellIndex].setText(`${turn ? 'X' : 'O'}`);
 
         // update cell DOM object text
         cellElement.textContent = cells[cellIndex].getText();
@@ -96,9 +100,9 @@ const playArea = (function () {
     }
 
     function changePlayer() {
-        player = player ? false : true; // toggle between x and o
+        turn = turn ? false : true; // toggle between x and o
         // update status text
-        statusText.textContent = `${player ? 'X' : 'O'}'s turn`
+        statusText.textContent = `${turn ? player1 : player2}'s turn`
     }
 
     function checkWinner() {
@@ -126,7 +130,7 @@ const playArea = (function () {
             // if all of the cells have content
             if (!cellsEmptyCondition()) {
                 if (firstCell.getText() == secondCell.getText() && secondCell.getText() == thirdCell.getText()) {
-                    statusText.textContent = `${firstCell.getText()} is the winner!`;
+                    statusText.textContent = `${firstCell.getText() == 'X' ? player1 : player2}` + " is the winner!";
                     win = true;
                     running = false; // stop the game when someone has won
                 } else {
@@ -161,7 +165,7 @@ const playArea = (function () {
             cellElement.textContent = cells[cellIndex].getText();
         })
         running = true;
-        statusText.textContent = `${player ? 'X' : 'O'}'s turn`
+        statusText.textContent = `${turn ? player1 : player2}'s turn`
     }
 });
 
