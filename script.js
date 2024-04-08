@@ -2,23 +2,37 @@ const mainContainer = document.querySelector('.main-container');
 const inputContainer = document.querySelector('.input-container');
 const gameContainerElement = document.getElementById('game-container');
 const playAreaElement = document.querySelector('.play-area');
-const startBtn = document.querySelector('.start-button');
+
 
 // get player 1 and player 2 names
 let player1, player2 = '';
-startBtn.addEventListener('click', () => {
-    player1 = document.querySelector('.player1').value;
-    player2 = document.querySelector('.player2').value;
-    mainContainer.removeChild(inputContainer);
-    playArea();
+
+// create input area container
+const inputArea = (function () {
+    const inputContainer = document.createElement('div');
+    inputContainer.setAttribute('class', '.input-container');
+    mainContainer.appendChild(inputContainer);
+    inputContainer.innerHTML = `<label for="player1">Player 1 name: </label>
+            <input type="text" class="player1">
+            <label for="player2">Player 2 name: </label>
+            <input type="text" class="player2">
+            <button class="start-button">Start Game</button>`
+    const startBtn = document.querySelector('.start-button');
+    startBtn.addEventListener('click', () => {
+        player1 = document.querySelector('.player1').value.trim();
+        player2 = document.querySelector('.player2').value.trim();
+        mainContainer.removeChild(inputContainer);
+        playArea();
+    })
 })
+inputArea();
 
 // create game container
 const playArea = (function () {
     let cells = []; // array containing cell objects;
     let turn = true; // true denotes X's turn, false denotes O's turn
     let running = false; // denotes game state
-    let win = false;
+    let win = false; // whether someone won or not
 
     // create status text element
     const statusText = document.createElement('div');
@@ -35,9 +49,10 @@ const playArea = (function () {
     const newGameBtn = document.createElement('button');
     newGameBtn.setAttribute('class', 'new-game-button');
     newGameBtn.textContent = 'New Game';
+    newGameBtn.addEventListener('click', newGame);
     playAreaElement.appendChild(newGameBtn);
 
-
+    // win conditions for tictactoe game
     const winConditions = [
         [0, 1, 2],
         [3, 4, 5],
@@ -70,6 +85,7 @@ const playArea = (function () {
         cell.setAttribute('index', cellObject.index);
         return cell;
     }
+
     // populate game container grid by 9 cells
     function initializeGame() {
         for (let i = 0; i < 9; i++) {
@@ -149,6 +165,7 @@ const playArea = (function () {
     function checkTie() {
         let tie = win ? false : true;
         cells.forEach(cell => {
+            // check one cell has no text, making tie condition false
             if (cell.getText().length == 0 || cell.getText() == '') {
                 tie = false;
                 return;
@@ -172,6 +189,11 @@ const playArea = (function () {
         })
         running = true;
         statusText.textContent = `${turn ? player1 : player2}'s turn`
+    }
+
+    function newGame() {
+        mainContainer.removeChild(playAreaElement);
+        inputArea();
     }
 });
 
