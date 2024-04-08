@@ -1,13 +1,28 @@
 const gameContainerElement = document.getElementById('game-container');
-const restartBtn = document.getElementById('reset-button');
-const statusText = document.querySelector('.status-text');
+const resetBtnWrapper = document.querySelector('.reset-button-wrapper');
+const playAreaElement = document.querySelector('.play-area');
+
+// const restartBtn = document.getElementById('reset-button');
+// const statusText = document.querySelector('.status-text');
 
 // create game container
-const gameContainer = (function () {
+const playArea = (function () {
     let cells = []; // array containing cell objects;
     let player = true; // true denotes X's turn, false denotes O's turn
     let running = false; // denotes game state
     let win = false;
+
+    // create restart button 
+    const restartBtn = document.createElement('button');
+    restartBtn.setAttribute('class', 'reset-button');
+    restartBtn.textContent = 'Reset';
+    resetBtnWrapper.appendChild(restartBtn);
+
+    // create status text element
+    const statusText = document.createElement('div');
+    statusText.setAttribute('class', 'status-text');
+    playAreaElement.appendChild(statusText);
+
     const winConditions = [
         [0, 1, 2],
         [3, 4, 5],
