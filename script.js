@@ -1,7 +1,6 @@
 const mainContainer = document.querySelector('.main-container');
 const inputContainer = document.querySelector('.input-container');
 const gameContainerElement = document.getElementById('game-container');
-const resetBtnWrapper = document.querySelector('.reset-button-wrapper');
 const playAreaElement = document.querySelector('.play-area');
 const startBtn = document.querySelector('.start-button');
 
@@ -21,16 +20,23 @@ const playArea = (function () {
     let running = false; // denotes game state
     let win = false;
 
-    // create restart button 
-    const restartBtn = document.createElement('button');
-    restartBtn.setAttribute('class', 'reset-button');
-    restartBtn.textContent = 'Reset';
-    resetBtnWrapper.appendChild(restartBtn);
-
     // create status text element
     const statusText = document.createElement('div');
     statusText.setAttribute('class', 'status-text');
     playAreaElement.appendChild(statusText);
+
+    // create restart button 
+    const restartBtn = document.createElement('button');
+    restartBtn.setAttribute('class', 'reset-button');
+    restartBtn.textContent = 'Reset';
+    playAreaElement.appendChild(restartBtn);
+
+    // create new game button
+    const newGameBtn = document.createElement('button');
+    newGameBtn.setAttribute('class', 'new-game-button');
+    newGameBtn.textContent = 'New Game';
+    playAreaElement.appendChild(newGameBtn);
+
 
     const winConditions = [
         [0, 1, 2],
@@ -74,7 +80,7 @@ const playArea = (function () {
             gameContainerElement.appendChild(cellElement) // create cell DOM element corresponding to cell object
         }
         running = true // start game
-        restartBtn.addEventListener('click', restartGame); // add eventListener to restart button
+        restartBtn.addEventListener('click', restartRound); // add eventListener to restart button
         statusText.textContent = `${turn ? player1 : player2}'s turn`
     };
     initializeGame();
@@ -156,7 +162,7 @@ const playArea = (function () {
     const cellElements = document.querySelectorAll('.cell');
 
     // remove text content and set running to true 
-    function restartGame() {
+    function restartRound() {
         cells.forEach(cell => {
             cell.setText('');
         })
