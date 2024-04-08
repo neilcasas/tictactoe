@@ -1,10 +1,15 @@
 const gameContainerElement = document.getElementById('game-container');
 const resetBtnWrapper = document.querySelector('.reset-button-wrapper');
 const playAreaElement = document.querySelector('.play-area');
+const startBtn = document.querySelector('.start-button');
 
-// const restartBtn = document.getElementById('reset-button');
-// const statusText = document.querySelector('.status-text');
-
+// get player 1 and player 2 names
+let player1, player2 = '';
+startBtn.addEventListener('click', () => {
+    player1 = document.querySelector('.player1').value;
+    player2 = document.querySelector('.player2').value;
+    console.log(player1 + " " + player2);
+})
 // create game container
 const playArea = (function () {
     let cells = []; // array containing cell objects;
@@ -158,4 +163,5 @@ const playArea = (function () {
         running = true;
         statusText.textContent = `${player ? 'X' : 'O'}'s turn`
     }
-})();
+});
+
