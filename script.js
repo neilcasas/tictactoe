@@ -1,8 +1,4 @@
 const mainContainer = document.querySelector('.main-container');
-const inputContainer = document.querySelector('.input-container');
-const gameContainerElement = document.getElementById('game-container');
-const playAreaElement = document.querySelector('.play-area');
-
 
 // get player 1 and player 2 names
 let player1, player2 = '';
@@ -16,7 +12,7 @@ const inputArea = (function () {
             <input type="text" class="player1">
             <label for="player2">Player 2 name: </label>
             <input type="text" class="player2">
-            <button class="start-button">Start Game</button>`
+            <button class="start-button">Start Game</button>`;
     const startBtn = document.querySelector('.start-button');
     startBtn.addEventListener('click', () => {
         player1 = document.querySelector('.player1').value.trim();
@@ -29,6 +25,16 @@ inputArea();
 
 // create game container
 const playArea = (function () {
+
+    // create play area element
+    const playAreaElement = document.createElement('div');
+    playAreaElement.setAttribute('class', 'play-area');
+    mainContainer.appendChild(playAreaElement);
+
+    // create game container element
+    const gameContainerElement = document.createElement('div');
+    gameContainerElement.setAttribute('id', 'game-container');
+    playAreaElement.appendChild(gameContainerElement);
     let cells = []; // array containing cell objects;
     let turn = true; // true denotes X's turn, false denotes O's turn
     let running = false; // denotes game state
@@ -196,4 +202,3 @@ const playArea = (function () {
         inputArea();
     }
 });
-
