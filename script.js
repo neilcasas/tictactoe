@@ -34,19 +34,20 @@ inputArea();
 // create game container
 const playArea = (function () {
 
+    let cells = []; // array containing cell objects;
+    let turn = true; // true denotes X's turn, false denotes O's turn
+    let running = false; // denotes game state
+    let win = false; // whether someone won or not
+
     // create play area element
     const playAreaElement = document.createElement('div');
     playAreaElement.setAttribute('class', 'play-area');
-    mainContainer.insertBefore(playAreaElement, footerElement);
+    mainContainer.appendChild(playAreaElement);
 
     // create game container element
     const gameContainerElement = document.createElement('div');
     gameContainerElement.setAttribute('id', 'game-container');
     playAreaElement.appendChild(gameContainerElement);
-    let cells = []; // array containing cell objects;
-    let turn = true; // true denotes X's turn, false denotes O's turn
-    let running = false; // denotes game state
-    let win = false; // whether someone won or not
 
     // create status text element
     const statusText = document.createElement('div');
