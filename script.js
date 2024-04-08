@@ -1,22 +1,23 @@
 const gameContainerElement = document.getElementById('game-container');
 const restartBtn = document.getElementById('reset-button');
 const statusText = document.querySelector('.status-text');
-let cells = []; // array containing cell objects;
-let player = true; // true denotes X's turn, false denotes O's turn
-let running = false; // denotes game state
-const winConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]
 
 // create game container
 const gameContainer = (function () {
+    let cells = []; // array containing cell objects;
+    let player = true; // true denotes X's turn, false denotes O's turn
+    let running = false; // denotes game state
+    let win = false;
+    const winConditions = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
 
     // create cell object
     function createCellObject(index) {
@@ -60,8 +61,8 @@ const gameContainer = (function () {
         if (cells[cellIndex].text != '' || running == false) {
             return;
         }
-        console.log('clicked')
         updateCell(this, cellIndex); // else call updateCell()
+        checkTie(); // check tie upon clicking
         checkWinner(); // check winner upon clicking
     }
 
@@ -82,8 +83,6 @@ const gameContainer = (function () {
 
     function checkWinner() {
         // check each winning condition
-        let win = false;
-
         for (let i = 0; i < winConditions.length; i++) {
             let condition = winConditions[i];
 
@@ -110,14 +109,29 @@ const gameContainer = (function () {
                     statusText.textContent = `${firstCell.getText()} is the winner!`;
                     win = true;
                     running = false; // stop the game when someone has won
-                    return win;
                 } else {
                     continue;
                 }
             }
         }
     }
+
+    function checkTie() {
+        let tie = win ? false : true;
+        cells.forEach(cell => {
+            if (cell.getText().length == 0 || cell.getText() == '') {
+                tie = false;
+                return;
+            }
+        })
+        if (tie) {
+            statusText.textContent = 'Game is a tie!';
+            running = false;
+        }
+    }
     const cellElements = document.querySelectorAll('.cell');
+
+    // remove text content and set running to true 
     function restartGame() {
         cells.forEach(cell => {
             cell.setText('');
@@ -129,6 +143,4 @@ const gameContainer = (function () {
         running = true;
         statusText.textContent = `${player ? 'X' : 'O'}'s turn`
     }
-
 })();
-
