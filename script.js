@@ -16,10 +16,17 @@ const inputArea = (function () {
     const inputContainer = document.createElement('div');
     inputContainer.setAttribute('class', 'input-container');
     mainContainer.appendChild(inputContainer);
-    inputContainer.innerHTML = `<label for="player1">Player 1 name</label>
-            <input type="text" class="player1" id="player1">
+    inputContainer.innerHTML = `
+            <div class ="player-input">
+            <div class="player1-input">
+            <label for="player1">Player 1 name</label>
+            <input type="text" class="player1" id="player1" placeholder = "Player 1" maxlength = "10">
+            </div>
+            <div class = "player2-input">
             <label for="player2">Player 2 name </label>
-            <input type="text" class="player2" id="player2">`;
+            <input type="text" class="player2" id="player2" placeholder = "Player 2" maxlength = "10">
+            </div>
+            </div>`;
 
     // create wrapper div for start button
     const startBtnWrapper = document.createElement('div');

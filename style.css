@@ -27,11 +27,32 @@ body {
     min-height: 100vh;
 }
 
+input,
+label,
+button {
+    font-size: 100%;
+    font-family: inherit;
+    appearance: none;
+}
+
 .input-container {
     display: flex;
     flex-direction: column;
     margin: auto;
     text-align: center;
+    gap: 1rem;
+}
+
+.player-input {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.player-input>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .play-area {
