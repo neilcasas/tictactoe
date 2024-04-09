@@ -1,4 +1,4 @@
-const mainContainer = document.querySelector('.main-container');
+const mainContentElement = document.querySelector('.main-content');
 
 // get player 1 and player 2 names
 let player1, player2 = '';
@@ -7,7 +7,7 @@ let player1, player2 = '';
 const inputArea = (function () {
     const inputContainer = document.createElement('div');
     inputContainer.setAttribute('class', 'input-container');
-    mainContainer.appendChild(inputContainer);
+    mainContentElement.appendChild(inputContainer);
     inputContainer.innerHTML = `
             <div class ="player-input">
             <div class="player1-input">
@@ -39,7 +39,7 @@ const inputArea = (function () {
         } else {
             player1 = player1Name;
             player2 = player2Name;
-            mainContainer.removeChild(inputContainer);
+            mainContentElement.removeChild(inputContainer);
             playArea();
         }
     })
@@ -57,7 +57,7 @@ const playArea = (function () {
     // create play area element
     const playAreaElement = document.createElement('div');
     playAreaElement.setAttribute('class', 'play-area');
-    mainContainer.appendChild(playAreaElement);
+    mainContentElement.appendChild(playAreaElement);
 
     // create game container element
     const gameContainerElement = document.createElement('div');
@@ -232,7 +232,7 @@ const playArea = (function () {
     }
 
     function newGame() {
-        mainContainer.removeChild(playAreaElement);
+        mainContentElement.removeChild(playAreaElement);
         inputArea();
     }
 });

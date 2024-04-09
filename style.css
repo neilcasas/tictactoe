@@ -33,10 +33,16 @@ body {
 }
 
 .main-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-content {
+    flex: 1;
     display: grid;
     position: relative;
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
 }
 
 input,
