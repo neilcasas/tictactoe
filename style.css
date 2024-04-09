@@ -27,6 +27,13 @@ body {
     min-height: 100vh;
 }
 
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    text-align: center;
+}
+
 .play-area {
     display: grid;
     grid-template-rows: 2 1fr;

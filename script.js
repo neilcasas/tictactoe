@@ -14,11 +14,11 @@ const footerElement = (function () {
 // create input area container
 const inputArea = (function () {
     const inputContainer = document.createElement('div');
-    inputContainer.setAttribute('class', '.input-container');
+    inputContainer.setAttribute('class', 'input-container');
     mainContainer.appendChild(inputContainer);
-    inputContainer.innerHTML = `<label for="player1">Player 1 name: </label>
+    inputContainer.innerHTML = `<label for="player1">Player 1 name</label>
             <input type="text" class="player1">
-            <label for="player2">Player 2 name: </label>
+            <label for="player2">Player 2 name </label>
             <input type="text" class="player2">
             <button class="start-button">Start Game</button>`;
     const startBtn = document.querySelector('.start-button');
