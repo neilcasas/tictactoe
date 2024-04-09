@@ -302,7 +302,7 @@ const footerElement = (function () {
 
     const footerText = document.createElement('a');
     footerText.setAttribute('href', 'https://github.com/neilcasas')
-    footerText.textContent = 'Created by Neil Casas';
+    footerText.textContent = 'Created by Neil Casas © 2024';
     footerDiv.appendChild(footerText);
 
     mainContainerElement.appendChild(footerDiv);
