@@ -81,10 +81,24 @@ button:hover {
     background-color: rgb(19, 55, 92);
 }
 
+.desc-area-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.description-area {
+    text-align: justify;
+    width: 30rem;
+}
+
 .input-container {
     display: flex;
     flex-direction: column;
-    margin: auto;
+    margin: 3rem auto;
     text-align: center;
     gap: 1rem;
 }
