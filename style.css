@@ -8,10 +8,17 @@
 
 :root {
     --main-font: 'Inter';
+    --bg-color: whitesmoke;
+    --accent-color: dodgerblue;
+    --font-color: rgb(24, 23, 23);
+    --accent-font-color: rgb(255, 255, 255);
+
 }
 
 body {
+    background-color: var(--bg-color);
     font-family: var(--main-font);
+    color: var(--font-color);
     font-size: 18px;
 }
 
@@ -33,6 +40,21 @@ button {
     font-size: 100%;
     font-family: inherit;
     appearance: none;
+}
+
+button {
+    background-color: dodgerblue;
+    color: var(--accent-font-color);
+    font-size: 0.8rem;
+    border-radius: 0.7rem;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: rgb(19, 55, 92);
 }
 
 .input-container {
