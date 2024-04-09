@@ -1,8 +1,16 @@
 const mainContainerElement = document.querySelector('.main-container');
 const mainContentElement = document.querySelector('.main-content');
+const descAreaWrapper = document.querySelector('.desc-area-wrapper');
 
 // get player 1 and player 2 names
 let player1, player2 = '';
+const descriptionArea = (function () {
+    const descriptionAreaDiv = document.createElement('div');
+    descriptionAreaDiv.setAttribute('class', 'description-area');
+    descriptionAreaDiv.textContent = 'Tic-Tac-Toe is a two-player game played on a 3x3 grid. One player is assigned "X" and the other "O". Players take turns marking a square on the grid with their respective symbol. The goal is to form a horizontal, vertical, or diagonal line of three of your symbols. The first player to achieve this wins the game. If all squares are filled without a winner, the game ends in a draw.';
+    descAreaWrapper.appendChild(descriptionAreaDiv);
+    return descriptionAreaDiv;
+})();
 
 // create input area container
 const inputArea = (function () {
@@ -41,6 +49,7 @@ const inputArea = (function () {
             player1 = player1Name;
             player2 = player2Name;
             mainContentElement.removeChild(inputContainer);
+            descAreaWrapper.removeChild(descriptionArea);
             playArea();
         }
     })
@@ -242,6 +251,7 @@ const playArea = (function () {
     function newGame() {
         mainContentElement.removeChild(playAreaElement);
         inputArea();
+        descAreaWrapper.appendChild(descriptionArea);
     }
 
     function enableCellAnimation() {
