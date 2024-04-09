@@ -72,15 +72,20 @@ const playArea = (function () {
     gameContainerElement.setAttribute('id', 'game-container');
     playAreaElement.appendChild(gameContainerElement);
 
+    // create game info div
+    const gameInfoElement = document.createElement('div');
+    gameInfoElement.setAttribute('class', 'game-info');
+    playAreaElement.appendChild(gameInfoElement);
+
     // create status text element
     const statusText = document.createElement('div');
     statusText.setAttribute('class', 'status-text');
-    playAreaElement.appendChild(statusText);
+    gameInfoElement.appendChild(statusText);
 
     // create play area button wrapper
     const playAreaBtnWrapper = document.createElement('div');
     playAreaBtnWrapper.setAttribute('class', 'play-btn-wrapper');
-    playAreaElement.appendChild(playAreaBtnWrapper);
+    gameInfoElement.appendChild(playAreaBtnWrapper);
 
     // create restart button 
     const restartBtn = document.createElement('button');
