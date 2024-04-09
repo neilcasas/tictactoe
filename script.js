@@ -17,9 +17,9 @@ const inputArea = (function () {
     inputContainer.setAttribute('class', 'input-container');
     mainContainer.appendChild(inputContainer);
     inputContainer.innerHTML = `<label for="player1">Player 1 name</label>
-            <input type="text" class="player1">
+            <input type="text" class="player1" id="player1">
             <label for="player2">Player 2 name </label>
-            <input type="text" class="player2">`;
+            <input type="text" class="player2" id="player2">`;
 
     // create wrapper div for start button
     const startBtnWrapper = document.createElement('div');
@@ -33,10 +33,16 @@ const inputArea = (function () {
     startBtnWrapper.appendChild(startBtn);
 
     startBtn.addEventListener('click', () => {
-        player1 = document.querySelector('.player1').value.trim();
-        player2 = document.querySelector('.player2').value.trim();
-        mainContainer.removeChild(inputContainer);
-        playArea();
+        let player1Name = document.querySelector('.player1').value.trim();
+        let player2Name = document.querySelector('.player2').value.trim();
+        if (player1Name.length == 0 || player2Name.length == 0) {
+            alert('Both players must have a name.')
+        } else {
+            player1 = player1Name;
+            player2 = player2Name;
+            mainContainer.removeChild(inputContainer);
+            playArea();
+        }
     })
 })
 inputArea();
