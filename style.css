@@ -122,11 +122,16 @@ button:hover {
     justify-content: center;
     height: 100px;
     width: 100px;
-    border: 1px solid var(fon);
+    border: 1px solid var(--font-color);
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 50px;
     transition: 0.3s ease;
+}
+
+.cell.disabled:hover {
+    box-shadow: none;
+    transform: none;
 }
 
 .cell:hover {

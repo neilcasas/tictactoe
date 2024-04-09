@@ -195,8 +195,11 @@ const playArea = (function () {
                 if (firstCell.getText() == secondCell.getText() && secondCell.getText() == thirdCell.getText()) {
                     statusText.textContent = `${firstCell.getText() == 'X' ? player1 : player2}` + " is the winner!";
                     win = true;
+                    disableCellAnimation();
                     running = false; // stop the game when someone has won
+                    return;
                 } else {
+                    enableCellAnimation();
                     continue;
                 }
             }
@@ -209,11 +212,13 @@ const playArea = (function () {
             // check one cell has no text, making tie condition false
             if (cell.getText().length == 0 || cell.getText() == '') {
                 tie = false;
+                enableCellAnimation();
                 return;
             }
         })
         if (tie) {
             statusText.textContent = 'Game is a tie!';
+            disableCellAnimation();
             running = false;
         }
     }
@@ -228,6 +233,7 @@ const playArea = (function () {
             let cellIndex = cellElement.getAttribute('index');
             cellElement.textContent = cells[cellIndex].getText();
         })
+        enableCellAnimation();
         running = true;
         statusText.textContent = `${turn ? player1 : player2}'s turn`
     }
@@ -235,6 +241,18 @@ const playArea = (function () {
     function newGame() {
         mainContentElement.removeChild(playAreaElement);
         inputArea();
+    }
+
+    function enableCellAnimation() {
+        cellElements.forEach(cellElement => {
+            cellElement.classList.remove('disabled');
+        })
+    }
+
+    function disableCellAnimation() {
+        cellElements.forEach(cellElement => {
+            cellElement.classList.add('disabled');
+        })
     }
 });
 
