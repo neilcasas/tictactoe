@@ -24,7 +24,12 @@ body {
 
 /* BODY STYLES */
 .title {
-    margin: auto;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    font-size: 1.75rem;
 }
 
 .main-container {
