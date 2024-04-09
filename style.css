@@ -124,6 +124,11 @@ button:hover {
     box-shadow: 0 0 0 2px;
     cursor: pointer;
     font-size: 50px;
+    transition: 0.3s;
+}
+
+.cell:hover {
+    background-color: #70b3fc;
 }
 
 .game-info {
