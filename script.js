@@ -19,9 +19,19 @@ const inputArea = (function () {
     inputContainer.innerHTML = `<label for="player1">Player 1 name</label>
             <input type="text" class="player1">
             <label for="player2">Player 2 name </label>
-            <input type="text" class="player2">
-            <button class="start-button">Start Game</button>`;
-    const startBtn = document.querySelector('.start-button');
+            <input type="text" class="player2">`;
+
+    // create wrapper div for start button
+    const startBtnWrapper = document.createElement('div');
+    startBtnWrapper.setAttribute('class', 'start-btn-wrapper');
+    inputContainer.appendChild(startBtnWrapper);
+
+    // create start button
+    const startBtn = document.createElement('button');
+    startBtn.setAttribute('class', 'start-button');
+    startBtn.textContent = 'Start Game';
+    startBtnWrapper.appendChild(startBtn);
+
     startBtn.addEventListener('click', () => {
         player1 = document.querySelector('.player1').value.trim();
         player2 = document.querySelector('.player2').value.trim();
