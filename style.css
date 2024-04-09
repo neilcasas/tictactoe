@@ -129,6 +129,21 @@ button:hover {
     transition: 0.3s ease;
 }
 
+.cell.disabled {
+    display: flex;
+    background-color: #70b3fc;
+    border: 1px solid rgb(201, 201, 201);
+    font-family: 'Nanum Pen Script';
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    border: 1px solid var(--font-color);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 50px;
+}
+
 .cell.disabled:hover {
     box-shadow: none;
     transform: none;

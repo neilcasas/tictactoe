@@ -199,7 +199,6 @@ const playArea = (function () {
                     running = false; // stop the game when someone has won
                     return;
                 } else {
-                    enableCellAnimation();
                     continue;
                 }
             }
@@ -220,6 +219,7 @@ const playArea = (function () {
             statusText.textContent = 'Game is a tie!';
             disableCellAnimation();
             running = false;
+            return;
         }
     }
     const cellElements = document.querySelectorAll('.cell');
