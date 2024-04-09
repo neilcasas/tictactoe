@@ -131,7 +131,7 @@ button:hover {
 
 .cell.disabled {
     display: flex;
-    background-color: #70b3fc;
+    background-color: #97b4d4;
     border: 1px solid rgb(201, 201, 201);
     font-family: 'Nanum Pen Script';
     align-items: center;
@@ -142,6 +142,22 @@ button:hover {
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 50px;
+}
+
+.cell.winning {
+    display: flex;
+    background-color: #ffff7f;
+    border: 1px solid rgb(201, 201, 201);
+    font-family: 'Nanum Pen Script';
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    border: 1px solid var(--font-color);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 50px;
+    transition: 0.5s ease;
 }
 
 .cell.disabled:hover {

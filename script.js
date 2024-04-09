@@ -195,6 +195,7 @@ const playArea = (function () {
                 if (firstCell.getText() == secondCell.getText() && secondCell.getText() == thirdCell.getText()) {
                     statusText.textContent = `${firstCell.getText() == 'X' ? player1 : player2}` + " is the winner!";
                     win = true;
+                    winningCells(condition);
                     disableCellAnimation();
                     running = false; // stop the game when someone has won
                     return;
@@ -253,6 +254,13 @@ const playArea = (function () {
         cellElements.forEach(cellElement => {
             cellElement.classList.add('disabled');
         })
+    }
+    // add the winning class to the cells with the win
+    function winningCells(winningCellIndices) {
+        for (let i = 0; i < winningCellIndices.length; i++) {
+            let element = document.querySelector(`.cell[index="${winningCellIndices[i]}"]`);
+            element.classList.add('winning');
+        }
     }
 });
 
