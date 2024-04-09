@@ -110,7 +110,7 @@ button:hover {
     display: grid;
     grid-template-columns: repeat(3, auto);
     margin: auto;
-    width: 300px;
+    width: 316px;
     gap: 0.5rem;
 }
 
