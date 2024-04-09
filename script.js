@@ -3,14 +3,6 @@ const mainContainer = document.querySelector('.main-container');
 // get player 1 and player 2 names
 let player1, player2 = '';
 
-// create footer element
-const footerElement = (function () {
-    const footerDiv = document.createElement('div');
-    footerDiv.setAttribute('class', 'footer');
-    footerDiv.textContent = 'Created by Neil Casas';
-    mainContainer.appendChild(footerDiv);
-})();
-
 // create input area container
 const inputArea = (function () {
     const inputContainer = document.createElement('div');

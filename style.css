@@ -47,6 +47,19 @@ button {
     appearance: none;
 }
 
+input {
+    border: 1px solid rgb(192, 192, 192);
+    padding: 0.3rem;
+    transition: 0.3s;
+    border-radius: 10px;
+}
+
+input:focus {
+    outline: none !important;
+    border: 1px solid dodgerblue;
+    box-shadow: 0 0 5px #70b3fc;
+}
+
 button {
     background-color: dodgerblue;
     color: var(--accent-font-color);
