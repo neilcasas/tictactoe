@@ -77,18 +77,23 @@ const playArea = (function () {
     statusText.setAttribute('class', 'status-text');
     playAreaElement.appendChild(statusText);
 
+    // create play area button wrapper
+    const playAreaBtnWrapper = document.createElement('div');
+    playAreaBtnWrapper.setAttribute('class', 'play-btn-wrapper');
+    playAreaElement.appendChild(playAreaBtnWrapper);
+
     // create restart button 
     const restartBtn = document.createElement('button');
     restartBtn.setAttribute('class', 'reset-button');
     restartBtn.textContent = 'Reset';
-    playAreaElement.appendChild(restartBtn);
+    playAreaBtnWrapper.appendChild(restartBtn);
 
     // create new game button
     const newGameBtn = document.createElement('button');
     newGameBtn.setAttribute('class', 'new-game-button');
     newGameBtn.textContent = 'New Game';
     newGameBtn.addEventListener('click', newGame);
-    playAreaElement.appendChild(newGameBtn);
+    playAreaBtnWrapper.appendChild(newGameBtn);
 
     // win conditions for tictactoe game
     const winConditions = [

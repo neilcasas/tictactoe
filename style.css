@@ -65,7 +65,6 @@ button {
     grid-template-columns: repeat(3, auto);
     margin: auto;
     width: 300px;
-    gap: 2px;
 }
 
 .cell {
@@ -75,12 +74,15 @@ button {
     height: 100px;
     width: 100px;
     border: 2px solid;
+    box-shadow: 0 0 0 2px;
     cursor: pointer;
     font-size: 50px;
 }
 
-.play-button-wrapper {
+.play-btn-wrapper {
+    display: flex;
     margin: auto;
+    gap: 1rem;
 }
 
 .status-text {
