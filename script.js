@@ -239,10 +239,20 @@ const playArea = (function () {
 });
 
 // create footer element
-
 const footerElement = (function () {
     const footerDiv = document.createElement('div');
     footerDiv.setAttribute('class', 'footer');
-    footerDiv.textContent = 'Created by Neil Casas';
+
+    const gitHubIcon = document.createElement('img');
+    gitHubIcon.setAttribute('src', 'github.svg');
+    gitHubIcon.setAttribute('alt', 'github-icon');
+    gitHubIcon.setAttribute('id', 'github-icon');
+    footerDiv.appendChild(gitHubIcon);
+
+    const footerText = document.createElement('a');
+    footerText.setAttribute('href', 'https://github.com/neilcasas')
+    footerText.textContent = 'Created by Neil Casas';
+    footerDiv.appendChild(footerText);
+
     mainContainerElement.appendChild(footerDiv);
 })();
