@@ -1,3 +1,4 @@
+const mainContainerElement = document.querySelector('.main-container');
 const mainContentElement = document.querySelector('.main-content');
 
 // get player 1 and player 2 names
@@ -236,3 +237,12 @@ const playArea = (function () {
         inputArea();
     }
 });
+
+// create footer element
+
+const footerElement = (function () {
+    const footerDiv = document.createElement('div');
+    footerDiv.setAttribute('class', 'footer');
+    footerDiv.textContent = 'Created by Neil Casas';
+    mainContainerElement.appendChild(footerDiv);
+})();
