@@ -12,7 +12,7 @@
     --accent-color: dodgerblue;
     --font-color: rgb(24, 23, 23);
     --accent-font-color: rgb(255, 255, 255);
-
+    --cell-border-color: rgb(164, 164, 164);
 }
 
 body {
@@ -116,13 +116,12 @@ button:hover {
 
 .cell {
     display: flex;
-    border: 1px solid rgb(192, 192, 192);
+    border: 1px solid var(--cell-border-color);
     font-family: 'Nanum Pen Script';
     align-items: center;
     justify-content: center;
     height: 100px;
     width: 100px;
-    border: 1px solid var(--font-color);
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 50px;
@@ -131,14 +130,13 @@ button:hover {
 
 .cell.disabled {
     display: flex;
-    background-color: #97b4d4;
-    border: 1px solid rgb(201, 201, 201);
+    background-color: #70b3fc;
+    border: 1px solid var(--cell-border-color);
     font-family: 'Nanum Pen Script';
     align-items: center;
     justify-content: center;
     height: 100px;
     width: 100px;
-    border: 1px solid var(--font-color);
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 50px;
@@ -146,14 +144,13 @@ button:hover {
 
 .cell.winning {
     display: flex;
-    background-color: #ffff7f;
-    border: 1px solid rgb(201, 201, 201);
+    background-color: rgb(255, 242, 165);
+    border: 1px solid var(--cell-border-color);
     font-family: 'Nanum Pen Script';
     align-items: center;
     justify-content: center;
     height: 100px;
     width: 100px;
-    border: 1px solid var(--font-color);
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 50px;
